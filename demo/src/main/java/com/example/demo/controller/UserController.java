@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.User;
-import com.example.demo.service.UserService;
+import com.example.demo.entity.Employee;
+import com.example.demo.service.impl.UserUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,25 +10,25 @@ import java.util.List;
 @RestController
 public class UserController {
     @Autowired
-    private UserService userService;
+    private UserUserServiceImpl userService;
 
     @PostMapping("/adduser")
-    public User addUser(@RequestBody User user) {
-        return userService.insertUser(user);
+    public Employee addUser(@RequestBody Employee employee) {
+        return userService.insertUser(employee);
     }
 
     @PostMapping("/addusers")
-    public List<User> addUsers(@RequestBody List<User> users) {
-        return userService.insertUsers(users);
+    public List<Employee> addUsers(@RequestBody List<Employee> employees) {
+        return userService.insertUsers(employees);
     }
 
-    @GetMapping("/getUser/{id}")
-    public User getUser(@PathVariable int id) {
+    @GetMapping("/getUserById/{id}")
+    public Employee getUser(@PathVariable int id) {
         return userService.getUserById(id);
     }
 
     @PutMapping("/update")
-    public User updateUser(@RequestBody User u) {
+    public Employee updateUser(@RequestBody Employee u) {
         return userService.updateUser(u);
     }
 
@@ -38,7 +38,12 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
-    public List<User> getAllUsers() {
+    public List<Employee> getAllUsers() {
         return userService.getAllUser();
+    }
+
+    @GetMapping("/getEmployeeAgeById/{id}")
+    public Employee getEmployeeAge(@PathVariable int id) {
+        return userService.getEmployeeAge(id);
     }
 }
